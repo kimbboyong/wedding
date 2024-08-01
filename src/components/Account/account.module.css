@@ -1,0 +1,7 @@
+.accodion::before {
+  display: none;
+}
+
+.accountList:last-child {
+  margin-bottom: 0;
+}
