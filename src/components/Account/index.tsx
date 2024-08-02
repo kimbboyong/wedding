@@ -1,3 +1,6 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import styles from "./account.module.css";
+import Swal from "sweetalert2";
 import {
   Accordion,
   AccordionDetails,
@@ -5,10 +8,6 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styles from "./account.module.css";
-import Swal from "sweetalert2";
-
 type AccountType = {
   id: number;
   user: string;

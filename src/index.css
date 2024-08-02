@@ -28,3 +28,15 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after,
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  font-size: 30px !important;
+  color: #333;
+}
+
+.swiper-pagination-bullet-active {
+  background: #333 !important;
+}

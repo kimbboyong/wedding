@@ -1,32 +1,31 @@
-import { Container } from "@mui/material";
+import styled from "styled-components";
 import View from "./page/View";
-// import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Box } from "@mui/material";
 
-// const theme = createTheme({
-//   typography: {
-//     allVariants: {
-//       color: "#333",
-//     },
-//   },
-//   palette: {
-//     primary: {
-//       main: "#2196f3",
-//       contrastText: "#fff",
-//     },
-//     error: {
-//       main: "#ef5350",
-//     },
-//   },
-// });
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1976d2",
+    },
+  },
+});
 
 function App() {
   return (
-    // <ThemeProvider theme={theme}>
-    <Container sx={{ bgcolor: "#FBFBFB", height: "100vh" }}>
-      <View />
-    </Container>
-    // </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <View />
+      </Container>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
+const Container = styled(Box)`
+  width: 100%;
+  margin: auto;
+  max-width: 500px;
+  background-color: #fbfbfb;
+`;
