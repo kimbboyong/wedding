@@ -1,0 +1,34 @@
+.imgFigure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.imgFigure img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.gridItem {
+  height: 150px;
+}
+
+.gridItem figure {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 3px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gridItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
