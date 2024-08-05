@@ -2,6 +2,7 @@ import styled from "styled-components";
 import View from "./page/View";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box } from "@mui/material";
+import SnowEffect from "./components/SnowEffect";
 
 const theme = createTheme({
   palette: {
@@ -17,6 +18,7 @@ function App() {
       <Container>
         <View />
       </Container>
+      <SnowEffect />
     </ThemeProvider>
   );
 }

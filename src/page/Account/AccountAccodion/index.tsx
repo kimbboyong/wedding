@@ -19,7 +19,7 @@ type AccountType = {
   }[];
 };
 
-const Account = () => {
+const AccountAccodion = () => {
   const accountData: AccountType[] = [
     {
       id: 0,
@@ -120,4 +120,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default AccountAccodion;

@@ -1,13 +1,11 @@
-import Account from "../../components/Account";
-import Gallery from "../../components/Gallery";
-import Location from "../../components/Location";
+import Gallery from "../Gallery";
+import Location from "../Location";
 import FixeDate from "../FixeDate";
 import Intro from "../Intro";
+import Account from "../Account";
+import GuestBook from "../GuestBook";
 
 const View = () => {
-  const test = navigator.userAgent;
-
-  console.log("구분", test);
   return (
     <>
       <Intro />
@@ -15,6 +13,7 @@ const View = () => {
       <Gallery />
       <Location />
       <Account />
+      <GuestBook />
     </>
   );
 };

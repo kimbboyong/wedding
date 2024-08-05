@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
 export const GlobalWrap = styled.div`
-  padding: 0 60px;
+  padding: 0 20px;
 `;
