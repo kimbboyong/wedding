@@ -1,9 +1,9 @@
 import { useState } from "react";
 import style from "./gallery.module.css";
-import CommonModal from "../CommonModal";
+import CommonModal from "../../components/CommonModal";
 import GalleryDetail from "./GalleryDetail";
 import { imgData } from "./fakeData";
-import SectionTitle from "../SectionTitle";
+import SectionTitle from "../../components/SectionTitle";
 import styled from "styled-components";
 import { Box } from "@mui/material";
 import { GlobalWrap } from "../../style/global.styled";
@@ -51,5 +51,7 @@ const Gallery = () => {
 export default Gallery;
 
 const Container = styled(Box)`
+  position: relative;
   margin-bottom: 60px;
+  z-index: 3;
 `;
