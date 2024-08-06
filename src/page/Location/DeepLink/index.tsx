@@ -21,7 +21,7 @@ const DeepLink = () => {
 
   useEffect(() => {
     const { Kakao } = window as any;
-    Kakao.init(import.meta.env.VITE_KAKAO_KEY);
+    Kakao.init("024b3135f2e691465d0414e99fbf1d2b");
   }, []);
 
   const myKakaoNavi = () => {
