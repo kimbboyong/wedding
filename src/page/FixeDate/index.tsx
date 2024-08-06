@@ -27,6 +27,8 @@ const Container = styled(Box)`
   margin-bottom: 60px;
   figure {
     margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
   }
 `;
 

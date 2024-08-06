@@ -1,41 +1,10 @@
 import styled from "styled-components";
 import { Box, Button } from "@mui/material";
 import { useEffect } from "react";
+import KaKaoNavi from "./components/KaKaoNavi";
+import TmapNavi from "./components/TmapNavi";
 
 const DeepLink = () => {
-  const handleDeepLink = (url: string, downloadUrl: string) => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isAndroid = userAgent.includes("android");
-    const isIOS = userAgent.includes("iphone") || userAgent.includes("ipad");
-
-    window.location.href = url;
-
-    setTimeout(() => {
-      if (isAndroid) {
-        window.location.href = downloadUrl;
-      } else if (isIOS) {
-        window.location.href = downloadUrl;
-      }
-    }, 2000);
-  };
-
-  useEffect(() => {
-    const { Kakao } = window as any;
-    Kakao.init(import.meta.env.VITE_KAKAO_KEY);
-  }, []);
-
-  const myKakaoNavi = () => {
-    const { Kakao } = window as any;
-
-    Kakao.Navi.start({
-      name: "마리아쥬스퀘어",
-      x: 127.03678450961253,
-      y: 37.52158798397567,
-      coordType: "wgs84",
-    });
-  };
-  console.log("build test");
-
   return (
     <Container>
       <DeepLinkTitle>
@@ -45,46 +14,10 @@ const DeepLink = () => {
 
       <DeepLinkList>
         <DeepLinkItem>
-          <Button
-            variant="outlined"
-            sx={{
-              width: "100%",
-              display: "flex",
-              gap: "5px",
-              paddingX: 0,
-              border: "1px solid #ccc",
-            }}
-            onClick={(e) => {
-              e.preventDefault();
-              handleDeepLink(
-                "tmap://",
-                "https://play.google.com/store/apps/details?id=com.skt.tmap.ku"
-              );
-            }}
-          >
-            <figure>
-              <img src="/images/ico-tmap.png" alt="" />
-            </figure>
-            <span>티맵</span>
-          </Button>
+          <TmapNavi />
         </DeepLinkItem>
         <DeepLinkItem>
-          <Button
-            variant="outlined"
-            sx={{
-              width: "100%",
-              display: "flex",
-              gap: "5px",
-              paddingX: 0,
-              border: "1px solid #ccc",
-            }}
-            onClick={myKakaoNavi}
-          >
-            <figure>
-              <img src="/images/ico-kakaonavi.png" alt="" />
-            </figure>
-            <span>카카오내비</span>
-          </Button>
+          <KaKaoNavi />
         </DeepLinkItem>
         <DeepLinkItem>
           <Button
