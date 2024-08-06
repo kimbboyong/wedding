@@ -21,16 +21,16 @@ const DeepLink = () => {
 
   useEffect(() => {
     const { Kakao } = window as any;
-    Kakao.init("024b3135f2e691465d0414e99fbf1d2b");
+    Kakao.init(import.meta.env.VITE_KAKAO_KEY);
   }, []);
 
   const myKakaoNavi = () => {
     const { Kakao } = window as any;
 
     Kakao.Navi.start({
-      name: "목적지명",
-      x: 127.123456,
-      y: 37.123456,
+      name: "마리아쥬스퀘어",
+      x: 127.03678450961253,
+      y: 37.52158798397567,
       coordType: "wgs84",
     });
   };
