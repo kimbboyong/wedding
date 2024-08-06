@@ -1,5 +1,3 @@
-import React from "react";
-import { GlobalWrap } from "../../../style/global.styled";
 import styled from "styled-components";
 import { Box, Button } from "@mui/material";
 

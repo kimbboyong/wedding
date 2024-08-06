@@ -1,4 +1,3 @@
-import React from "react";
 import { GlobalWrap } from "../../style/global.styled";
 import AccountAccodion from "./AccountAccodion";
 import styled from "styled-components";

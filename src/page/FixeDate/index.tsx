@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import React from "react";
 import styled from "styled-components";
 import { GlobalWrap } from "../../style/global.styled";
 

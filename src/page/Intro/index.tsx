@@ -13,7 +13,6 @@ import {
   NameWrap,
   TextRed,
 } from "./Intro.style";
-import { JoinFullSharp } from "@mui/icons-material";
 import { GlobalWrap } from "../../style/global.styled";
 
 const Intro = () => {

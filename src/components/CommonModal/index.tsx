@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 
 import Modal from "@mui/material/Modal";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
