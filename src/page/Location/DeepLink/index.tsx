@@ -34,6 +34,7 @@ const DeepLink = () => {
       coordType: "wgs84",
     });
   };
+  console.log("build test");
 
   return (
     <Container>
