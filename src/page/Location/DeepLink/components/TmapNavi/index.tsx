@@ -1,17 +1,24 @@
 import { Button } from "@mui/material";
 
-const TmapNavi = () => {
-  const destination = {
-    name: "마리아쥬 스퀘어",
-    x: 127.03678450961253,
-    y: 37.52158798397567,
-  };
-  const handleTmapNavi = () => {
-    const tmapUrl = `tmap://route?ep=${destination.x},${
-      destination.y
-    }&name=${encodeURIComponent(destination.name)}`;
+const destination = {
+  name: "마리안스퀘어",
+  x: 127.03678450961253, // 경도
+  y: 37.52158798397567, // 위도
+};
 
-    window.location.href = tmapUrl;
+const TmapNavi = () => {
+  const handleTmapNavi = () => {
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      const tmapUrl = `tmap://route?ep=${destination.x},${
+        destination.y
+      }&name=${encodeURIComponent(destination.name)}`;
+      window.location.href = tmapUrl;
+    } else {
+      const tmapStoreUrl = `https://play.google.com/store/apps/details?id=com.skt.tmap.ku`;
+      window.open(tmapStoreUrl, "_blank");
+    }
   };
 
   return (
