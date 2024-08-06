@@ -17,7 +17,6 @@ const SnowEffect = () => {
         color="pink" // 눈 색상 (기본값: 흰색)
         snowflakeCount={50} // 눈송이 개수
       />
-      {/* 다른 콘텐츠 */}
     </div>
   );
 };

@@ -4,6 +4,22 @@ import styled from "styled-components";
 import { Box, Button } from "@mui/material";
 
 const DeepLink = () => {
+  const handleDeepLink = (url: string, downloadUrl: string) => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isAndroid = userAgent.includes("android");
+    const isIOS = userAgent.includes("iphone") || userAgent.includes("ipad");
+
+    window.location.href = url;
+
+    setTimeout(() => {
+      if (isAndroid) {
+        window.location.href = downloadUrl;
+      } else if (isIOS) {
+        window.location.href = downloadUrl;
+      }
+    }, 2000);
+  };
+
   return (
     <Container>
       <DeepLinkTitle>
@@ -21,6 +37,13 @@ const DeepLink = () => {
               gap: "5px",
               paddingX: 0,
               border: "1px solid #ccc",
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              handleDeepLink(
+                "tmap://",
+                "https://play.google.com/store/apps/details?id=com.skt.tmap.ku"
+              );
             }}
           >
             <figure>
@@ -63,18 +86,6 @@ const DeepLink = () => {
             <span>네이버지도</span>
           </Button>
         </DeepLinkItem>
-        {/* <DeepLinkItem>
-          <figure>
-            <img src="/images/ico-kakaonavi.png" alt="" />
-          </figure>
-          <span>카카오내비</span>
-        </DeepLinkItem>
-        <DeepLinkItem>
-          <figure>
-            <img src="/images/ico-navermap.png" alt="" />
-          </figure>
-          <span>네이버지도</span>
-        </DeepLinkItem> */}
       </DeepLinkList>
     </Container>
   );
@@ -83,6 +94,8 @@ const DeepLink = () => {
 export default DeepLink;
 
 const Container = styled(Box)`
+  position: relative;
+  z-index: 3;
   margin-bottom: 30px;
 `;
 const DeepLinkTitle = styled(Box)`
@@ -117,5 +130,10 @@ const DeepLinkItem = styled.li`
   span {
     font-size: 14px;
     color: #333;
+  }
+  button {
+    &:hover {
+      border: 1px solid #ccc;
+    }
   }
 `;
