@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Box, Button } from "@mui/material";
+import { useEffect } from "react";
 
 const DeepLink = () => {
   const handleDeepLink = (url: string, downloadUrl: string) => {
@@ -16,6 +17,22 @@ const DeepLink = () => {
         window.location.href = downloadUrl;
       }
     }, 2000);
+  };
+
+  useEffect(() => {
+    const { Kakao } = window as any;
+    Kakao.init(import.meta.env.VITE_KAKAO_KEY);
+  }, []);
+
+  const myKakaoNavi = () => {
+    const { Kakao } = window as any;
+
+    Kakao.Navi.start({
+      name: "목적지명",
+      x: 127.123456,
+      y: 37.123456,
+      coordType: "wgs84",
+    });
   };
 
   return (
@@ -60,6 +77,7 @@ const DeepLink = () => {
               paddingX: 0,
               border: "1px solid #ccc",
             }}
+            onClick={myKakaoNavi}
           >
             <figure>
               <img src="/images/ico-kakaonavi.png" alt="" />
