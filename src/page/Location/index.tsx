@@ -12,7 +12,6 @@ import { GlobalWrap } from "../../style/global.styled";
 
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import DirectionsSubwayIcon from "@mui/icons-material/DirectionsSubway";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 type ColorType = {
   color?: string;
@@ -27,8 +26,6 @@ const Location = () => {
     37.521991232737875,
     127.03662350759456
   );
-
-  console.log(containerRef.current);
 
   useEffect(() => {
     if (containerRef.current) {
