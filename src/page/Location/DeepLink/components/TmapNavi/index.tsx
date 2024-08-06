@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const TmapNavi = () => {
   const [currentLocation, setCurrentLocation] = useState<{

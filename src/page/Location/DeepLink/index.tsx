@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Box, Button } from "@mui/material";
-import { useEffect } from "react";
 import KaKaoNavi from "./components/KaKaoNavi";
 import TmapNavi from "./components/TmapNavi";
 
