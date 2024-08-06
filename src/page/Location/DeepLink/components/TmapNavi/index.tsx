@@ -1,25 +1,40 @@
 import { Button } from "@mui/material";
-
-const destination = {
-  name: "마리안스퀘어",
-  x: 127.03678450961253, // 경도
-  y: 37.52158798397567, // 위도
-};
+import { useState } from "react";
 
 const TmapNavi = () => {
-  const handleTmapNavi = () => {
-    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const [message, setMessage] = useState<string | null>(null);
+  const apiKey = import.meta.env.VITE_TMAP_KEY;
 
-    if (isMobile) {
-      const tmapUrl = `tmap://route?ep=${destination.x},${
-        destination.y
-      }&name=${encodeURIComponent(destination.name)}`;
-      window.location.href = tmapUrl;
-    } else {
-      const tmapStoreUrl = `https://play.google.com/store/apps/details?id=com.skt.tmap.ku`;
-      window.open(tmapStoreUrl, "_blank");
+  const handleTmapNavi = async () => {
+    const destination = {
+      name: "마리안스퀘어",
+      x: 127.03678450961253,
+      y: 37.52158798397567,
+    };
+
+    const url = `https://apis.openapi.sk.com/tmap/routes?version=1&appKey=${apiKey}&startX=127.0&startY=37.0&endX=${destination.x}&endY=${destination.y}`;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+
+      if (data.routes && data.routes.length > 0) {
+        const tmapUrl = `tmap://route?ep=${destination.x},${
+          destination.y
+        }&name=${encodeURIComponent(destination.name)}`;
+        window.location.href = tmapUrl;
+      } else {
+        setMessage("경로를 찾을 수 없습니다.");
+      }
+    } catch (error: any) {
+      setMessage(`오류 발생: ${error.message}`);
     }
   };
+
+  console.log(message);
 
   return (
     <Button
