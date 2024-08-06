@@ -58,7 +58,7 @@ const TmapNavi = () => {
       }
 
       const result = await response.json();
-      console.log(result);
+      console.log("result?", result);
     } catch (error) {
       console.error("에러 발생:", error);
     }
