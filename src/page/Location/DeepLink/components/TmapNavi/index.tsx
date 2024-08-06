@@ -11,7 +11,6 @@ const TmapNavi = () => {
   const destinationX = 127.03678450961253;
   const destinationY = 37.52158798397567;
   const appKey = import.meta.env.VITE_TMAP_KEY;
-
   const handleTmapNavi = () => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -20,7 +19,7 @@ const TmapNavi = () => {
       /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
 
     const tmapUrl = `tmap://route?ep=${destinationX},${destinationY}`;
-
+    appKey;
     if (isAndroid) {
       window.location.href = tmapUrl;
 
