@@ -2,39 +2,37 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 
 const TmapNavi = () => {
-  const [message, setMessage] = useState<string | null>(null);
-  const apiKey = import.meta.env.VITE_TMAP_KEY;
+  const appKey = import.meta.env.VITE_TMAP_KEY;
+  const handleTmapNavi = () => {
+    const destinationName = encodeURIComponent("마리안스퀘어");
+    const lon = 127.03678450961253;
+    const lat = 37.52158798397567;
 
-  const handleTmapNavi = async () => {
-    const destination = {
-      name: "마리안스퀘어",
-      x: 127.03678450961253,
-      y: 37.52158798397567,
-    };
+    const isAndroid = /Android/i.test(navigator.userAgent);
 
-    const url = `https://apis.openapi.sk.com/tmap/routes?version=1&appKey=${apiKey}&startX=127.0&startY=37.0&endX=${destination.x}&endY=${destination.y}`;
+    const tmapAppUrl = `tmap://route?name=${destinationName}&lon=${lon}&lat=${lat}`;
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+    const tmapDownloadUrl = isAndroid
+      ? "https://play.google.com/store/apps/details?id=com.skt.tmap.ku"
+      : "https://apps.apple.com/kr/app/tmap/id545373202";
+
+    const appCheckUrl = isAndroid
+      ? "intent://navigation?lat=" +
+        lat +
+        "&lon=" +
+        lon +
+        "#Intent;scheme=tmap;package=com.skt.tmap;end"
+      : tmapAppUrl;
+
+    const startTime = Date.now();
+    window.location.href = appCheckUrl;
+
+    setTimeout(() => {
+      if (Date.now() - startTime < 2000) {
+        window.location.href = tmapDownloadUrl;
       }
-      const data = await response.json();
-
-      if (data.routes && data.routes.length > 0) {
-        const tmapUrl = `tmap://route?ep=${destination.x},${
-          destination.y
-        }&name=${encodeURIComponent(destination.name)}`;
-        window.location.href = tmapUrl;
-      } else {
-        setMessage("경로를 찾을 수 없습니다.");
-      }
-    } catch (error: any) {
-      setMessage(`오류 발생: ${error.message}`);
-    }
+    }, 1500);
   };
-
-  console.log(message);
 
   return (
     <Button
