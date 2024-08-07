@@ -1,8 +1,7 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
 
 const TmapNavi = () => {
-  const appKey = import.meta.env.VITE_TMAP_KEY;
+  // const appKey = import.meta.env.VITE_TMAP_KEY;
   const handleTmapNavi = () => {
     const destinationName = encodeURIComponent("마리안스퀘어");
     const lon = 127.03678450961253;
