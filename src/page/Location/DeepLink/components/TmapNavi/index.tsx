@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 const TmapNavi = () => {
   const appKey = import.meta.env.VITE_TMAP_KEY;
   const openTmapNavi = () => {
-    const destinationName = encodeURIComponent("마리안스퀘어");
+    const destinationName = encodeURIComponent("마리아쥬 스퀘어");
     const lon = 127.03678450961253;
     const lat = 37.52158798397567;
 

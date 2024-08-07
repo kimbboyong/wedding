@@ -11,7 +11,7 @@ const KaKaoNavi = () => {
     const { Kakao } = window as any;
 
     Kakao.Navi.start({
-      name: "마리아쥬스퀘어",
+      name: "마리아쥬 스퀘어",
       x: 127.03678450961253,
       y: 37.52158798397567,
       coordType: "wgs84",

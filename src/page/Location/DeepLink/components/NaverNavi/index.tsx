@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
 
 const NaverNavi = () => {
-  const destinationName = encodeURIComponent("Naver 본사");
+  const destinationName = encodeURIComponent("마리아쥬 스퀘어");
   const lon = 127.03678450961253;
   const lat = 37.52158798397567;
 
   const openNaverMap = () => {
-    const naverMapUrl = `nmap://route/car?slat=37.4640070&slng=126.9522394&sname=${destinationName}&dlat=${lat}&dlng=${lon}&dname=%EC%98%AC%EB%A6%BC%ED%94%BD%EA%B3%B5%EC%9B%90&appname=com.example.myapp`;
+    const naverMapUrl = `nmap://navigation?dlat=${lat}&dlng=${lon}&dname=${destinationName}&appname=com.example.myapp`;
 
     window.open(naverMapUrl, "_blank");
   };
