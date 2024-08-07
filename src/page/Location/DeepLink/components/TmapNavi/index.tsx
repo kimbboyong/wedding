@@ -7,32 +7,10 @@ const TmapNavi = () => {
     const lon = 127.03678450961253;
     const lat = 37.52158798397567;
 
-    const isAndroid = /Android/i.test(navigator.userAgent);
-
     const tmapAppUrl = `https://apis.openapi.sk.com/tmap/app/routes?appKey=${appKey}&name=${destinationName}&lon=${lon}&lat=${lat}`;
 
-    const tmapDownloadUrl = isAndroid
-      ? "https://play.google.com/store/apps/details?id=com.skt.tmap.ku"
-      : "https://apps.apple.com/kr/app/tmap/id545373202";
-
-    const appCheckUrl = isAndroid
-      ? "intent://navigation?lat=" +
-        lat +
-        "&lon=" +
-        lon +
-        "#Intent;scheme=tmap;package=com.skt.tmap;end"
-      : tmapAppUrl;
-
-    const startTime = Date.now();
-    window.location.href = appCheckUrl;
-
-    setTimeout(() => {
-      if (Date.now() - startTime < 2000) {
-        window.location.href = tmapDownloadUrl;
-      }
-    }, 1500);
+    window.open(tmapAppUrl, "_blank");
   };
-
   return (
     <Button
       variant="outlined"
