@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import KaKaoNavi from "./components/KaKaoNavi";
 import TmapNavi from "./components/TmapNavi";
+import NaverNavi from "./components/NaverNavi";
 
 const DeepLink = () => {
   return (
@@ -19,21 +20,7 @@ const DeepLink = () => {
           <KaKaoNavi />
         </DeepLinkItem>
         <DeepLinkItem>
-          <Button
-            variant="outlined"
-            sx={{
-              width: "100%",
-              display: "flex",
-              gap: "5px",
-              paddingX: 0,
-              border: "1px solid #ccc",
-            }}
-          >
-            <figure>
-              <img src="/images/ico-navermap.png" alt="" />
-            </figure>
-            <span>네이버지도</span>
-          </Button>
+          <NaverNavi />
         </DeepLinkItem>
       </DeepLinkList>
     </Container>

@@ -7,7 +7,7 @@ const KaKaoNavi = () => {
     Kakao.init(import.meta.env.VITE_KAKAO_KEY);
   }, []);
 
-  const handleKakaoNavi = () => {
+  const openKakaoNavi = () => {
     const { Kakao } = window as any;
 
     Kakao.Navi.start({
@@ -28,7 +28,7 @@ const KaKaoNavi = () => {
         paddingX: 0,
         border: "1px solid #ccc",
       }}
-      onClick={handleKakaoNavi}
+      onClick={openKakaoNavi}
     >
       <figure>
         <img src="/images/ico-kakaonavi.png" alt="" />
