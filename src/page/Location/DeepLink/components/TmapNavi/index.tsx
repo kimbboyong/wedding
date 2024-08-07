@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 
 const TmapNavi = () => {
-  // const appKey = import.meta.env.VITE_TMAP_KEY;
+  const appKey = import.meta.env.VITE_TMAP_KEY;
   const handleTmapNavi = () => {
     const destinationName = encodeURIComponent("마리안스퀘어");
     const lon = 127.03678450961253;
@@ -9,7 +9,7 @@ const TmapNavi = () => {
 
     const isAndroid = /Android/i.test(navigator.userAgent);
 
-    const tmapAppUrl = `tmap://route?name=${destinationName}&lon=${lon}&lat=${lat}`;
+    const tmapAppUrl = `https://apis.openapi.sk.com/tmap/app/routes?appKey=${appKey}&name=${destinationName}&lon=${lon}&lat=${lat}`;
 
     const tmapDownloadUrl = isAndroid
       ? "https://play.google.com/store/apps/details?id=com.skt.tmap.ku"
