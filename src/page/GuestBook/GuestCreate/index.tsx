@@ -1,18 +1,33 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, Stack, TextField } from "@mui/material";
 import { addDoc, collection } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { db } from "../../../firebase/firebase";
+import { Opacity } from "@mui/icons-material";
 
 const GuestCreate = () => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userContent, setUserContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
 
   const GuestSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+    }
+    setLoading(true);
     if (userName === "" || userPassword === "" || userContent === "") {
+      setLoading(false);
       return alert("공백");
     }
     const date = new Date();
@@ -32,9 +47,23 @@ const GuestCreate = () => {
       setUserName("");
       setUserPassword("");
       setUserContent("");
+      setLoading(false);
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const BtnStyle = {
+    width: "100%",
+    backgroundColor: "#000",
+    ...(success && {
+      "&:hover": {
+        bgcolor: "#000",
+        backgroundColor: "#000",
+      },
+    }),
   };
 
   return (
@@ -68,13 +97,39 @@ const GuestCreate = () => {
           onChange={(e) => setUserContent(e.target.value)}
         />
       </GuestDivider>
-      <InputButton
+
+      <Box sx={{ position: "relative" }}>
+        <InputButton
+          type="submit"
+          sx={BtnStyle}
+          variant="contained"
+          disabled={loading}
+        >
+          작성
+        </InputButton>
+        {loading && (
+          <CircularProgress
+            size={24}
+            sx={{
+              width: "100%",
+              color: "#fff",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginTop: "-12px",
+              marginLeft: "-12px",
+            }}
+          />
+        )}
+      </Box>
+
+      {/* <InputButton
         type="submit"
         sx={{ width: "100%", backgroundColor: "#000" }}
         variant="contained"
       >
         작성
-      </InputButton>
+      </InputButton> */}
     </Box>
   );
 };

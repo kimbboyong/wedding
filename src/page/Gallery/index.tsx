@@ -27,7 +27,7 @@ const Gallery = () => {
         <SectionTitle Entitle="Gallery" KoTitle="갤러리" />
 
         <div className={style.grid}>
-          {imgData.map((img) => (
+          {imgData.slice(0, 6).map((img) => (
             <div
               key={img.id}
               className={style.gridItem}
