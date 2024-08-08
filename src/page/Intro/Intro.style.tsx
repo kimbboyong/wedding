@@ -54,7 +54,7 @@ export const IntroMainImg = styled(Box)``;
 
 export const IntroTitle = styled(Box)`
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   p {
     font-size: 14px;
     color: #656565;
