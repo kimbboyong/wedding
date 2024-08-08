@@ -1,63 +1,144 @@
-import { Box } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
 
+import { useEffect, useState } from "react";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../../../firebase/firebase";
+import CommonModal from "../../../components/CommonModal";
+
+interface Items {
+  id: string;
+  name: string;
+  password: string;
+  content: string;
+  date: string;
+  sortDate: {
+    seconds: number;
+    nanoseconds: number;
+  };
+}
+
 const GuestRead = () => {
+  const [data, setData] = useState<Items[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletePw, setDeletePw] = useState<string>("");
+  const [dataId, setDataId] = useState<string>("");
+  const [alertModal, setAlertModal] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "posts"), (querySnapshot) => {
+      const dataList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Items[];
+
+      const sortData = dataList.sort((a, b) => {
+        return (
+          b.sortDate.seconds - a.sortDate.seconds ||
+          b.sortDate.nanoseconds - a.sortDate.nanoseconds
+        );
+      });
+
+      setData(sortData);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setAlertModal(false);
+  };
+
+  const handleDelete = (id: string) => {
+    setIsModalOpen(true);
+    setDataId(id);
+    const filterDate = data.map((item) => console.log(item.id === id));
+    console.log(filterDate);
+  };
+
+  const handlePostDelete = async () => {
+    const docRef = doc(db, "posts", dataId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const itemData = docSnap.data() as Items;
+
+      if (itemData.password === deletePw) {
+        await deleteDoc(docRef);
+        setIsModalOpen(false);
+      } else {
+        setAlertModal(true);
+      }
+    }
+  };
+
+  const handleAlertModal = () => {
+    setAlertModal(false);
+  };
+
   return (
     <Container>
       <ReadList>
-        <ReadItem>
-          <ReadInfo>
-            <strong>작성자</strong>
-            <ClearIcon sx={{ color: "#333" }} />
-          </ReadInfo>
-          <ReadText>
-            축하합니다 축하하빈다축하합니다 축하하빈다축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-          </ReadText>
-          <ReadDate>
-            <span>24.10.11</span>
-          </ReadDate>
-        </ReadItem>
-        <ReadItem>
-          <ReadInfo>
-            <strong>작성자</strong>
-            <ClearIcon sx={{ color: "#333" }} />
-          </ReadInfo>
-          <ReadText>
-            축하합니다 축하하빈다축하합니다 축하하빈다축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-          </ReadText>
-          <ReadDate>
-            <span>24.10.11</span>
-          </ReadDate>
-        </ReadItem>
-        <ReadItem>
-          <ReadInfo>
-            <strong>작성자</strong>
-            <ClearIcon sx={{ color: "#333" }} />
-          </ReadInfo>
-          <ReadText>
-            축하합니다 축하하빈다축하합니다 축하하빈다축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-            축하합니다 축하하빈다 축하합니다 축하하빈다 축하합니다 축하하빈다
-          </ReadText>
-          <ReadDate>
-            <span>24.10.11</span>
-          </ReadDate>
-        </ReadItem>
+        {data?.map((item) => (
+          <ReadItem key={item.id}>
+            <ReadInfo>
+              <strong>{item.name}</strong>
+              <ClearIcon
+                onClick={() => handleDelete(item.id)}
+                sx={{ color: "#333" }}
+              />
+            </ReadInfo>
+            <ReadText>{item.content}</ReadText>
+            <ReadDate>
+              <span>{item.date}</span>
+            </ReadDate>
+          </ReadItem>
+        ))}
       </ReadList>
+
+      <CommonModal isOpen={isModalOpen} closeModal={closeModal}>
+        <InputTextField
+          margin="normal"
+          fullWidth
+          name="password"
+          label="비밀번호를 입력해주세요."
+          type="password"
+          id="password"
+          sx={{ marginTop: 0 }}
+          onChange={(e) => setDeletePw(e.target.value)}
+        />
+        <InputButton
+          type="button"
+          sx={{ width: "100%", backgroundColor: "#000" }}
+          variant="contained"
+          onClick={handlePostDelete}
+        >
+          삭제
+        </InputButton>
+        {alertModal && (
+          <AlertBg>
+            <AlertModal>
+              <p>비밀번호가 일치하지 않습니다!</p>
+              <InputButton
+                type="button"
+                sx={{ width: "100%", backgroundColor: "#000" }}
+                variant="contained"
+                onClick={handleAlertModal}
+              >
+                확인
+              </InputButton>
+            </AlertModal>
+          </AlertBg>
+        )}
+      </CommonModal>
     </Container>
   );
 };
@@ -111,5 +192,55 @@ const ReadDate = styled(Box)`
   span {
     font-size: 14px;
     color: #333;
+  }
+`;
+
+const InputTextField = styled(TextField)({
+  " &.MuiFormControl-root": {
+    marginBottom: "10px",
+  },
+  "& label.Mui-focused": {
+    color: "#89757a",
+  },
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
+      borderColor: "#89757a",
+    },
+  },
+});
+
+const InputButton = styled(Button)`
+  background-color: #000;
+  &:hover {
+    background-color: #000 !important;
+    opacity: 0.8;
+  }
+`;
+
+const AlertBg = styled(Box)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+`;
+
+const AlertModal = styled(Box)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 16px;
+  z-index: 2;
+  width: 100%;
+  max-width: 300px;
+  z-index: 2;
+  p {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
   }
 `;
