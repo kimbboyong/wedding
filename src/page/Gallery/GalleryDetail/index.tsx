@@ -1,14 +1,14 @@
 import style from "../gallery.module.css";
+import styled from "styled-components";
+import { Box } from "@mui/material";
 import { Navigation, Pagination, A11y } from "swiper/modules";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
 import { imgData } from "../fakeData";
-import styled from "styled-components";
-import { Box } from "@mui/material";
 
 interface Props {
   filterImgId: number;

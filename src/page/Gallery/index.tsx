@@ -1,12 +1,14 @@
 import { useState } from "react";
 import style from "./gallery.module.css";
+import { Box } from "@mui/material";
+import styled from "styled-components";
+
 import CommonModal from "../../components/CommonModal";
 import GalleryDetail from "./GalleryDetail";
-import { imgData } from "./fakeData";
 import SectionTitle from "../../components/SectionTitle";
-import styled from "styled-components";
-import { Box } from "@mui/material";
 import { GlobalWrap } from "../../style/global.styled";
+
+import { imgData } from "./fakeData";
 
 const Gallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +42,11 @@ const Gallery = () => {
           ))}
         </div>
 
-        <CommonModal isOpen={isModalOpen} closeModal={closeModal}>
+        <CommonModal
+          isOpen={isModalOpen}
+          closeModal={closeModal}
+          closeBtn={true}
+        >
           <GalleryDetail filterImgId={filterImgId} />
         </CommonModal>
       </GlobalWrap>

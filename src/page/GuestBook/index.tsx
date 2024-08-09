@@ -1,8 +1,8 @@
+import { Box } from "@mui/material";
 import styled from "styled-components";
 
-import SectionTitle from "../../components/SectionTitle";
 import { GlobalWrap } from "../../style/global.styled";
-import { Box } from "@mui/material";
+import SectionTitle from "../../components/SectionTitle";
 import GuestCreate from "./GuestCreate";
 import GuestRead from "./GuestRead";
 

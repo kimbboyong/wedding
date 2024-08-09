@@ -1,6 +1,7 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import styled from "styled-components";
 import ClearIcon from "@mui/icons-material/Clear";
+import CommonModal from "../../../components/CommonModal";
 
 import { useEffect, useState } from "react";
 import {
@@ -11,7 +12,6 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
-import CommonModal from "../../../components/CommonModal";
 
 interface Items {
   id: string;
@@ -117,11 +117,19 @@ const GuestRead = () => {
         />
         <InputButton
           type="button"
-          sx={{ width: "100%", backgroundColor: "#000" }}
           variant="contained"
+          sx={{ backgroundColor: "#000", marginBottom: "5px" }}
           onClick={handlePostDelete}
         >
           삭제
+        </InputButton>
+        <InputButton
+          type="button"
+          sx={{ backgroundColor: "#000" }}
+          variant="contained"
+          onClick={closeModal}
+        >
+          취소
         </InputButton>
         {alertModal && (
           <AlertBg>
@@ -146,8 +154,8 @@ const GuestRead = () => {
 export default GuestRead;
 
 const Container = styled(Box)``;
-const ReadList = styled.ul``;
-const ReadItem = styled.li`
+const ReadList = styled(Box)``;
+const ReadItem = styled(Box)`
   background: #f3f3f3;
   min-height: 130px;
 
@@ -166,7 +174,6 @@ const ReadInfo = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
   strong,
   span {
     font-size: 12px;
@@ -178,7 +185,7 @@ const ReadInfo = styled(Box)`
   }
 `;
 
-const ReadText = styled.p`
+const ReadText = styled(Typography)`
   font-size: 14px;
   color: #333;
   word-break: keep-all;
@@ -210,6 +217,7 @@ const InputTextField = styled(TextField)({
 });
 
 const InputButton = styled(Button)`
+  width: 100%;
   background-color: #000;
   &:hover {
     background-color: #000 !important;

@@ -6,11 +6,12 @@ import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   isOpen: boolean;
+  closeBtn?: boolean;
   closeModal: () => void;
   children?: ReactNode;
 }
 
-const CommonModal = ({ isOpen, closeModal, children }: Props) => {
+const CommonModal = ({ isOpen, closeBtn, closeModal, children }: Props) => {
   return (
     <div>
       <Modal
@@ -20,7 +21,7 @@ const CommonModal = ({ isOpen, closeModal, children }: Props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CloseIcon sx={closeStyle} onClick={closeModal} />
+          {closeBtn && <CloseIcon sx={closeStyle} onClick={closeModal} />}
           {children}
         </Box>
       </Modal>
