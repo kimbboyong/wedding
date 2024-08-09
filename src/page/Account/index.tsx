@@ -1,7 +1,7 @@
+import { Box } from "@mui/material";
+import styled from "styled-components";
 import { GlobalWrap } from "../../style/global.styled";
 import AccountAccodion from "./AccountAccodion";
-import styled from "styled-components";
-import { Box } from "@mui/material";
 import SectionTitle from "../../components/SectionTitle";
 
 const Account = () => {

@@ -1,7 +1,7 @@
 import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import styled from "styled-components";
 import { addDoc, collection } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import { db } from "../../../firebase/firebase";
 
 const GuestCreate = () => {
@@ -121,14 +121,6 @@ const GuestCreate = () => {
           />
         )}
       </Box>
-
-      {/* <InputButton
-        type="submit"
-        sx={{ width: "100%", backgroundColor: "#000" }}
-        variant="contained"
-      >
-        작성
-      </InputButton> */}
     </Box>
   );
 };

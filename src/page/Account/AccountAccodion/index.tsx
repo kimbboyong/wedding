@@ -8,6 +8,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+
 type AccountType = {
   id: number;
   user: string;
